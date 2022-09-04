@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessAccessLayer", "Busi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommonEntities", "CommonEntities\CommonEntities.csproj", "{0DEC6BE6-DF03-4D12-9A6B-5A318D591336}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVCBasicsPracticeProject_Core", "MVCBasicsPracticeProject_Core\MVCBasicsPracticeProject_Core.csproj", "{07708A13-B2C4-4A44-AD76-7E49A642C770}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{0DEC6BE6-DF03-4D12-9A6B-5A318D591336}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0DEC6BE6-DF03-4D12-9A6B-5A318D591336}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0DEC6BE6-DF03-4D12-9A6B-5A318D591336}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07708A13-B2C4-4A44-AD76-7E49A642C770}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07708A13-B2C4-4A44-AD76-7E49A642C770}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07708A13-B2C4-4A44-AD76-7E49A642C770}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07708A13-B2C4-4A44-AD76-7E49A642C770}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

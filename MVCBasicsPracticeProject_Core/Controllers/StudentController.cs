@@ -5,64 +5,83 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using MVCBasicsPracticeProject_Core.Models;
 using Microsoft.Data.SqlClient;
-
-
+using DataAccessLayer;
+using CommonEntities;
 
 namespace MVCBasicsPracticeProject_Core.Controllers
 {
     public class StudentController : Controller
     {
         private readonly IConfiguration _configuration;
-        public StudentController(IConfiguration configuration)
+        private readonly IStudent _student;
+
+        public StudentController(IConfiguration configuration,IStudent student)
         {
             this._configuration = configuration;
+            this._student = student;
         }
 
         public IActionResult Index()
         {
-            DataTable dataTable = new DataTable();
-            using(SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("MVCCRUDwithoutEFContext")))
-            {
-                connection.Open();
-                SqlDataAdapter dataAdapter = new SqlDataAdapter("GetAllStudents", connection);
-                dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
-                dataAdapter.Fill(dataTable);
+            //DataTable dataTable = new DataTable();
+            //using(SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("MVCCRUDwithoutEFContext")))
+            //{
+            //    connection.Open();
+            //    SqlDataAdapter dataAdapter = new SqlDataAdapter("GetAllStudents", connection);
+            //    dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+            //    dataAdapter.Fill(dataTable);
 
-            }
-            return View(dataTable);
+            //}
+            //return View(dataTable);
+            var model=_student.GetAllStudents();
+            return View(model);
+
         }
 
         public IActionResult AddorEdit(int? id)
         {
-            StudentViewModel studentViewModel = new StudentViewModel();
+            Student studentViewModel = new Student();
             if (id > 0)
-                studentViewModel = FetchBookByID(id);
+            { 
+                int ID = (int)id;
+                studentViewModel = _student.GetStudent(ID);
+            }
 
             return View(studentViewModel);
            
         }
 
         [HttpPost]
-        public IActionResult AddorEdit( [Bind("StudentNumber,HallTicketNumber,FullName,FirstName,LastName,MobileNumber,FatherName")] StudentViewModel studentViewModel)
+        public IActionResult AddorEdit( [Bind("StudentNumber,HallTicketNumber,FullName,FirstName,LastName,MobileNumber,FatherName")] Student studentViewModel)
         {
             if(ModelState.IsValid)
             {
-                using (SqlConnection sqlConnection = new SqlConnection(_configuration.GetConnectionString("MVCCRUDwithoutEFContext")))
-                {
-                    sqlConnection.Open();
-                    SqlCommand cmd = new SqlCommand("StudentAddOrEdit",sqlConnection);
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("HallTicketNumber", studentViewModel.HallTicketNumber);
-                    cmd.Parameters.AddWithValue("FullName", studentViewModel.FullName);
-                    cmd.Parameters.AddWithValue("FirstName", studentViewModel.FirstName);
-                    cmd.Parameters.AddWithValue("LastName", studentViewModel.LastName);
-                    cmd.Parameters.AddWithValue("MobileNumber", studentViewModel.MobileNumber);
-                    cmd.Parameters.AddWithValue("FatherName", studentViewModel.FatherName);
-                    cmd.Parameters.AddWithValue("StudentNumber", studentViewModel.StudentNumber);
-                    cmd.ExecuteNonQuery();
+                //using (SqlConnection sqlConnection = new SqlConnection(_configuration.GetConnectionString("MVCCRUDwithoutEFContext")))
+                //{
+                //    sqlConnection.Open();
+                //    SqlCommand cmd = new SqlCommand("StudentAddOrEdit",sqlConnection);
+                //    cmd.CommandType = CommandType.StoredProcedure;
+                //    cmd.Parameters.AddWithValue("HallTicketNumber", studentViewModel.HallTicketNumber);
+                //    cmd.Parameters.AddWithValue("FullName", studentViewModel.FullName);
+                //    cmd.Parameters.AddWithValue("FirstName", studentViewModel.FirstName);
+                //    cmd.Parameters.AddWithValue("LastName", studentViewModel.LastName);
+                //    cmd.Parameters.AddWithValue("MobileNumber", studentViewModel.MobileNumber);
+                //    cmd.Parameters.AddWithValue("FatherName", studentViewModel.FatherName);
+                //    cmd.Parameters.AddWithValue("StudentNumber", studentViewModel.StudentNumber);
+                //    cmd.ExecuteNonQuery();
 
+                //}
+                if(studentViewModel.StudentNumber > 0)
+                {
+                    _student.Update(studentViewModel);
+                    return RedirectToAction(nameof(Index));
                 }
-                return RedirectToAction(nameof(Index));
+                else 
+                {
+                    _student.Add(studentViewModel);
+                    return RedirectToAction(nameof(Index));
+                }
+               
             }
 
             return View(studentViewModel);
@@ -70,29 +89,31 @@ namespace MVCBasicsPracticeProject_Core.Controllers
 
         public IActionResult Delete(int? id)
         {
-            StudentViewModel studentViewModel = FetchBookByID(id);
+            int ID = (int)id;
+            Student studentViewModel = _student.GetStudent(ID);
             return View(studentViewModel);
         }
 
         [HttpPost,ActionName("Delete")]
         public IActionResult DeleteConfirmed(int id)
         {
-            using(SqlConnection sqlConnection=new SqlConnection(_configuration.GetConnectionString("MVCCRUDwithoutEFContext")))
-            {
-                sqlConnection.Open();
-                SqlCommand cmd = new SqlCommand("DeleteStudentbyID", sqlConnection);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("StudentNumber",id);
-                cmd.ExecuteNonQuery();
-            }
+            //using(SqlConnection sqlConnection=new SqlConnection(_configuration.GetConnectionString("MVCCRUDwithoutEFContext")))
+            //{
+            //    sqlConnection.Open();
+            //    SqlCommand cmd = new SqlCommand("DeleteStudentbyID", sqlConnection);
+            //    cmd.CommandType = CommandType.StoredProcedure;
+            //    cmd.Parameters.AddWithValue("StudentNumber",id);
+            //    cmd.ExecuteNonQuery();
+            //}
+            _student.Delete(id);
             return RedirectToAction(nameof(Index));
         }
 
 
         [NonAction]
-        public StudentViewModel FetchBookByID(int? id)
+        public Student FetchBookByID(int? id)
         {
-            StudentViewModel studentViewModel = new StudentViewModel();
+            Student studentViewModel = new Student();
             using (SqlConnection sqlConnection = new SqlConnection(_configuration.GetConnectionString("MVCCRUDwithoutEFContext")))
             {
                 DataTable dtbl = new DataTable();

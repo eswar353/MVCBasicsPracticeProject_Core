@@ -1,4 +1,4 @@
-﻿@model System.Data.DataTable
+﻿@model IEnumerable<CommonEntities.Student>
 
 @{
     ViewData["Title"] = "List Of Students";
@@ -15,21 +15,21 @@
             <th>FullName</th>
             <th>PhoneNumber</th>
             <th>FatherName</th>
-            <th><a asp-action="AddorEdit"></a></th>
+            <th><a asp-action="AddorEdit">Create</a></th>
         </tr>
         
     </thead>
     <tbody>
-        @for(int i=0;i<Model.Rows.Count; i++ )
+        @foreach (var Student in Model)
         {
             <tr>
-                <td>@Model.Rows[i]["HallTicketNumber"]</td>
-                <td>@Model.Rows[i]["FullName"]</td>
-                <td>@Model.Rows[i]["MobileNumber"]</td>
-                <td>@Model.Rows[i]["FatherName"]</td>
+                <td>@Student.HallTicketNumber</td>
+                <td>@Student.FullName</td>
+                <td>@Student.MobileNumber</td>
+                <td>@Student.FatherName</td>
                 <td>
-                    <a asp-action="AddOrEdit" asp-route-id="@Model.Rows[i]["StudentNumber"]">Edit</a>
-                    <a asp-action="Delete" asp-route-id="@Model.Rows[i]["StudentNumber"]">Delete</a>
+                    <a asp-action="AddorEdit" asp-route-id="@Student.StudentNumber">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@Student.StudentNumber">Delete</a>
                 </td>
             </tr>
         }

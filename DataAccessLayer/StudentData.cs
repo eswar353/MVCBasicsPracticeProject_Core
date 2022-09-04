@@ -3,9 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
+
 namespace DataAccessLayer
 {
-    internal  class StudentData : IStudent
+    public  class StudentData : IStudent
     {
         private readonly AppDBContext context;
 
@@ -42,7 +43,8 @@ namespace DataAccessLayer
 
         public IEnumerable<Student> GetAllStudents()
         {
-            return context.Students;
+            IEnumerable<Student> students = context.Students;
+            return students;
         }
 
         public Student GetStudent(int ID)

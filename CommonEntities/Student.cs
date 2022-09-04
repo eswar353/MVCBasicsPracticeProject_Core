@@ -12,6 +12,7 @@ namespace CommonEntities
         public string LastName { get; set; }
         public string MobileNumber { get; set; }
         public string FatherName { get; set; }
+        [Key]
         public int StudentNumber { get; set; }
     }
 }

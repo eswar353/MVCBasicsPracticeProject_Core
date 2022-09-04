@@ -1,11 +1,10 @@
-﻿using CommonEntities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DataAccessLayer
+namespace CommonEntities
 {
-    internal interface IStudent
+    public interface IStudent
     {
         IEnumerable<Student> GetAllStudents();
         Student GetStudent(int ID);
@@ -13,8 +12,6 @@ namespace DataAccessLayer
         Student Delete(int ID);
 
         Student Update(Student student);
-
-
-
     }
+
 }

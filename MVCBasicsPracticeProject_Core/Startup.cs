@@ -1,3 +1,4 @@
+using CommonEntities;
 using DataAccessLayer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -27,6 +28,7 @@ namespace MVCBasicsPracticeProject_Core
             services.AddDbContextPool<AppDBContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("MVCCRUDwithoutEFContext")));
             services.AddControllersWithViews();
+            services.AddScoped<IStudent, StudentData>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -10,7 +10,6 @@ namespace DataAccessLayer
         {
 
         }
-
         public DbSet<Student> Students { get; set; }
     }
 }

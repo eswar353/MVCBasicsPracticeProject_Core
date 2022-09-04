@@ -1,7 +1,6 @@
-﻿@model MVCBasicsPracticeProject_Core.Models.StudentViewModel
-
+﻿@model CommonEntities.Student;
 @{
-    ViewData["Title"] = Model.HallTicketNumber == "" ? "Create Student": "Update Student"  ;
+    ViewData["Title"] = Model.StudentNumber > 0 ? "Update Student" : "Create Student" ;
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -49,7 +48,7 @@
                 <span asp-validation-for="FatherName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="@Model.StudentNumber > 0 ? 'Update' : 'Create Student'' " class="btn btn-primary" />
             </div>
         </form>
     </div>
