@@ -6,7 +6,7 @@ using System.Text;
 
 namespace DataAccessLayer
 {
-    public  class StudentData : IStudent
+    public  class StudentData
     {
         private readonly AppDBContext context;
 
@@ -14,6 +14,7 @@ namespace DataAccessLayer
         {
             this.context = context;
         }
+
 
         public Student Add(Student student)
         {
