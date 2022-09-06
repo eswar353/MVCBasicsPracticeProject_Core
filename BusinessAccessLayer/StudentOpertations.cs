@@ -7,15 +7,15 @@ namespace BusinessAccessLayer
 {
     public class StudentOpertations : IStudent
     {
-        public AppDBContext contextoperations;
+        public static AppDBContext contextoperations;
        
         
         public StudentOpertations(AppDBContext contextoperations)
         {
             this.contextoperations = contextoperations;
         }
+       // StudentData _studentData = new StudentData(contextoperations);
 
-        
         public Student Add(Student student)
         {
 

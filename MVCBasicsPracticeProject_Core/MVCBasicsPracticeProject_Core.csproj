@@ -15,9 +15,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BusinessAccessLayer\BusinessAccessLayer.csproj" />
+    <ProjectReference Include="..\BusinessLogicLayer_ADO\BusinessLogicLayer_ADO.csproj" />
     <ProjectReference Include="..\CommonEntities\CommonEntities.csproj" />
-    <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

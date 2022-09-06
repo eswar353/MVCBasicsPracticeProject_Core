@@ -8,10 +8,9 @@ namespace CommonEntities
     {
         IEnumerable<Student> GetAllStudents();
         Student GetStudent(int ID);
-        Student Add(Student student);
-        Student Delete(int ID);
-
-        Student Update(Student student);
+        int Add(Student student);
+        int Delete(int ID);
+        int Update(Student student);
     }
 
 }

@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using MVCBasicsPracticeProject_Core.Models;
 using Microsoft.Data.SqlClient;
-using DataAccessLayer;
 using CommonEntities;
 
 namespace MVCBasicsPracticeProject_Core.Controllers
@@ -69,8 +68,8 @@ namespace MVCBasicsPracticeProject_Core.Controllers
                 //    cmd.Parameters.AddWithValue("FatherName", studentViewModel.FatherName);
                 //    cmd.Parameters.AddWithValue("StudentNumber", studentViewModel.StudentNumber);
                 //    cmd.ExecuteNonQuery();
-
                 //}
+
                 if(studentViewModel.StudentNumber > 0)
                 {
                     _student.Update(studentViewModel);

@@ -1,6 +1,5 @@
-using BusinessAccessLayer;
+using BusinessLogicLayer_ADO;
 using CommonEntities;
-using DataAccessLayer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -26,10 +25,10 @@ namespace MVCBasicsPracticeProject_Core
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContextPool<AppDBContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("MVCCRUDwithoutEFContext")));
+            //services.AddDbContextPool<AppDBContext>(options =>
+            //options.UseSqlServer(Configuration.GetConnectionString("MVCCRUDwithoutEFContext")));
             services.AddControllersWithViews();
-            services.AddScoped<IStudent, StudentOpertations>();
+            services.AddScoped<IStudent,StudentOpertations_ADO>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
