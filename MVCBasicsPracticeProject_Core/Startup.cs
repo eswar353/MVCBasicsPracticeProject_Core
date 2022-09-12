@@ -29,6 +29,7 @@ namespace MVCBasicsPracticeProject_Core
             services.AddDbContextPool<AppDBContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("MVCCRUDwithoutEFContext")));
             services.AddControllersWithViews();
+            //test completed in this branch.
             services.AddScoped<IStudent, StudentOpertations>();
         }
 
